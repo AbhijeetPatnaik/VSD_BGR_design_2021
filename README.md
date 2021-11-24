@@ -16,7 +16,7 @@
    * [Part 8: Start-up circuit](#Part-8-Start-up-circuit)
    * [Part 9: complete BGR circuit](#Part-9-complete-BGR-circuit)
    * [Part 10: Layout of components](#Part-10-Layout-of-components)
-   * [Part 11: Top level extraction and LVS](#Part-11:-Top-level-extraction-and-LVS)
+   * [Part 11: Top level extraction and LVS](#Part-11-Top-level-extraction-and-LVS)
    * [Conclusion and Opinion](#Conclusion-and-Opinion)
    * [References](#References)
  
