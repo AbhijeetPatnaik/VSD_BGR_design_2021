@@ -16,9 +16,9 @@
    * [Part 8: Start-up circuit](-##-Part-8:-Start-up-circuit)
    * [Part 9: complete BGR circuit](-##-Part-9:-complete-BGR-circuit)
    * [Part 10: Layout of components](-##-Part-10:-Layout-of-components)
-   * [Part 11: Top level extraction and LVS] (#Part 11: Top level extraction and LVS)
- * [Conclusion and Opinion] (#Conclusion and Opinion)
- * [References] (#References)
+   * [Part 11: Top level extraction and LVS](-##Part-11:-Top-level-extraction-and-LVS)
+ *[Conclusion and Opinion](-##-Conclusion-and-Opinion)
+ *[References](-##-References)
  
  
  
@@ -382,4 +382,93 @@ Now device wise we have the following devices in our circuit.
 + NFETS
 + Resistor Bank
 + BJTs
+
+**Design of NFET**
+In our circuit we are using LVT type NFETs. placed the nfets in such a way that it follows common centroid matching
+
+![68](images/68.jpg)
+
+**Design of PFET**
+In our circuit we are using LVT type PFETs. These are matched from centre.
+
+![69](images/69.jpg)
+
+**Design of Resistor**
+In our design we are using poly resistors of W=1.41 and L=7.8. 
+9 poly resistors form R2 and 2 on corners form R1 and 2 dummy are placed. Matched with symmetry at the centre. 
+
+![70](images/70.jpg)
+
+**Design of PNP (BJT)**
+PNPT1_2 is Q1 and PNPT1_7 is Q3  at centre ,4 transistor on left and right are 8 Q2 rest are dummy.
+
+![71](images/71.jpg)
+
+**Design of STARTERNFET**
+We placed the the two w=1, l=7 NFETs 
+
+![72](images/72.jpg)
+
+**Top level design**
+To obtain the top level design, we have placed all the blocks together, routed it.  
+
+![73](images/73.jpg)
+
+
+
+
+
+## Part 11: Top level extraction and LVS
+In order to do the parasitic extraction follow the steps given below:
++ Open the Layout top.mag file >Options>Cell manger> select individual block and click open
++ In the magic command window type extract, all. This extracts the layout connectivity information into a ".ext." file.
++ Generally, if there are any warnings at this point, they would be because of wrong connections or short circuits or etc. But these are warnings and need not be errors.
++ Now, we need to convert the ".ext" file to a ".spice" file to use for simulations.
+
++ Use following commands: 
+  1. Ext2sim label on
+  2. Ext2sim
+  3. Ext2spice scale off
+  4. Ext2spice hierarchy off
+  5. Ext2spice
++ Run the above command for all the blocks and then finally on top level.
+
+![74](images/74.png)
+![75](images/75.jpg)
+![76](images/76.jpg)
+
+Observe the parasitic added.
+
+
+**LVS:**
+
+To run LVS open NETGEN and then type LVS “TOP.sp bgr” “TOP.spice top ” /home/Abhijeet/cad_vds/eda-technology/sky130/tech/netgen/sky130_setup.tcl and run the LVS
+
+![77](images/77.jpg)
+
+And you should get netlist match uniquely.
+
+**Post layout Simulation:**
+
+In the top-level file include all the individually extracted spice file of all the block and then run ngspice simulation to obtain post layout result with effects of parasitic.
+
+
+
+
+
+## Conclusion and Opinion
+The workshop is well paced program with good details on how to approach and start analog design. The hands-on experience is valuable in order to understand and retain the knowledge shared over two days. Step by step approach with connectivity between each module helps in learning concept from every angle. I would have preferred to have spent more time in understanding the calculation and analysis to determine the value of all the components such as resistors, BJT and FET’s. Over all good experience and insight into availability of open source tools to further learn more concepts 
+
+
+
+## References
+
++ https://github.com/ VrushabhDamle/sky130PLLdesignWorkshop
++ https://github.com/google/skywater-pdk-libs-sky130_fd_pr.git
++ https://www.vsdiat.com/
++ https://www.vlsisystemdesign.com/
++ https://github.com/silicon-vlsi-org/eda-technology/ 
++ https://github.com/vsdip/vsdopen2021_bgr
++ http://opencircuitdesign.com/magic/download.html
++ http://opencircuitdesign.com/magic/
 
