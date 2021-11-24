@@ -6,8 +6,8 @@
 
 
 ## INDEX
-   * [Part 1: Introduction to BGR](#Part-1:-Introduction-to-BGR)
-   * [Part 2: Tools and PDK setup](#Part-2:-Tools-and-PDK-setup)
+   * [Part 1: Introduction to BGR](#Part-1-:-Introduction-to-BGR)
+   * [Part 2: Tools and PDK setup](#Part-2-:-Tools-and-PDK-setup)
    * [Part 3: Design spec and data analysis](#Part-3:-Design-spec-and-data-analysis)
    * [Part 4: CTAT voltage generation circuit](#Part-4:-CTAT-voltage-generation-circuit)
    * [Part 5: PTAT voltage generation circuit](#Part-5:-PTAT-voltage-generation-circuit)
