@@ -6,25 +6,25 @@
 
 
 ## INDEX
-   * [Part 1: Introduction to BGR](-##-Part-1:-Introduction-to-BGR)
-   * [Part 2: Tools and PDK setup](-##-Part-2:-Tools-and-PDK-setup)
-   * [Part 3: Design spec and data analysis](-##-Part-3:-Design-spec-and-data-analysis)
-   * [Part 4: CTAT voltage generation circuit](-##-Part-4:-CTAT-voltage-generation-circuit)
-   * [Part 5: PTAT voltage generation circuit](-##-Part-5:-PTAT-voltage-generation-circuit)
-   * [Part 6: Biased current mirror circuit](-##-Part-6:-Biased-current-mirror-circuit)
-   * [Part 7: Reference voltage branch circuit](-##Part-7:-Reference-voltage-branch-circuit)
-   * [Part 8: Start-up circuit](-##-Part-8:-Start-up-circuit)
-   * [Part 9: complete BGR circuit](-##-Part-9:-complete-BGR-circuit)
-   * [Part 10: Layout of components](-##-Part-10:-Layout-of-components)
-   * [Part 11: Top level extraction and LVS](-##Part-11:-Top-level-extraction-and-LVS)
- *[Conclusion and Opinion](-##-Conclusion-and-Opinion)
- *[References](-##-References)
+   * [Part 1: Introduction to BGR](#Part-1:-Introduction-to-BGR)
+   * [Part 2: Tools and PDK setup](#Part-2:-Tools-and-PDK-setup)
+   * [Part 3: Design spec and data analysis](#Part-3:-Design-spec-and-data-analysis)
+   * [Part 4: CTAT voltage generation circuit](#Part-4:-CTAT-voltage-generation-circuit)
+   * [Part 5: PTAT voltage generation circuit](#Part-5:-PTAT-voltage-generation-circuit)
+   * [Part 6: Biased current mirror circuit](#Part-6:-Biased-current-mirror-circuit)
+   * [Part 7: Reference voltage branch circuit](#Part-7:-Reference-voltage-branch-circuit)
+   * [Part 8: Start-up circuit](#Part-8:-Start-up-circuit)
+   * [Part 9: complete BGR circuit](#Part-9:-complete-BGR-circuit)
+   * [Part 10: Layout of components](#Part-10:-Layout-of-components)
+   * [Part 11: Top level extraction and LVS](#Part-11:-Top-level-extraction-and-LVS)
+   * [Conclusion and Opinion](#Conclusion-and-Opinion)
+   * [References](#References)
  
  
  
  
  
- ## Part 1: Introduction to BGR
+ ### Part 1: Introduction to BGR
  
  BGR is a temperature independent voltage reference widely used in integrated circuits. It produces a constant voltage regardless of power supply and variation in temperature.
  ![1](images/1.jpg) 
@@ -62,7 +62,7 @@ Based on application BGR is characterised into 4 types
 
 
 
-## Part 2: Tools and PDK setup
+### Part 2: Tools and PDK setup
 
 Tools used:
     +	Ngspice: It is used for the transistor level circuit simulation and design.
@@ -90,7 +90,7 @@ Once all tools and pdk are set up ensure all tools are working properly.
 
 
 
-## Part 3: Design spec and data analysis
+### Part 3: Design spec and data analysis
 First thing before getting into design is to define the specifications. The device needs to be operated with in the specifications. For BGR below mentioned are the general specifications.
 ![7.1](images/7.1.jpg)
 It can be observed that for BGR the power consumption, temperature coefficient and start up time need to be low.
@@ -100,7 +100,7 @@ Well defined specification helps us in choosing the Mosfets, resistors and trans
 
 
 
-## Part 4: CTAT voltage generation circuit
+### Part 4: CTAT voltage generation circuit
 
 If we consider constant current is flowing through a forward biased diode, then with increase in temp. we can observe that the voltage across the diode is decreasing. Generally, it is found that the slope of the V~Temp is -2mV/deg Centigarde.
 ![10](images/10.jpg)
@@ -154,7 +154,7 @@ DC simulation is run from -40 deg C to 125 deg C.
 
 
 
-## Part 5: PTAT voltage generation circuit
+### Part 5: PTAT voltage generation circuit
 
 From Diode current equation (2) we can find that it has two parts, i.e.
 + Vt (Thermal Voltage) which is directly proportional to the temp(KT/Q).
@@ -201,7 +201,7 @@ On subtracting V(ra1) V(qp2) PTAT result is obtained, Resultant slope=0.00190636
 
 
 
-## Part 6: Biased current mirror circuit
+### Part 6: Biased current mirror circuit
 
 For both CTAT and PTAT design it was observed previously that a constant current source is required in order to obtain the desired slope of voltage wrt to temperature. 
 In a current mirror Iref sets Iout but Iout is tied closely with supply voltage. any variation in supply affects Iref and there by affecting the voltage reference. In order to improve PSRR of the system the current mirror should be able to bias itself i.e, Iref is derived from Iout.
@@ -222,7 +222,7 @@ Iout is defined by the above equation.
 
 
 
-## Part 7: Reference voltage branch circuit
+### Part 7: Reference voltage branch circuit
 
 CTAT, PTAT and their current source is designed. Next step is to add CTAT and PTAT to generate the required reference voltage.
 The reference circuit branch performs the addition of CTAT and PTAT voltages and gives the final reference voltage. MP3 is used as a mirror transistor to keep the current same as current mirror branches, R2 is used to scale PTAT to the same value as CTAT so that they cancel each other out and a BJT as diode in the reference branch. 
@@ -239,7 +239,7 @@ The reference circuit branch performs the addition of CTAT and PTAT voltages and
 
 
 
-## Part 8: Start-up circuit
+### Part 8: Start-up circuit
 
 **Why Start-up?**
 
@@ -254,7 +254,7 @@ In the below circuit net2 follows VDD. As net2 voltage rises greater than the th
 
 
 
-## Part 9: complete BGR circuit
+### Part 9: complete BGR circuit
 After implementing all the blocks. The blocks are connected to get the complete BGR circuit.
 
 ![51](images/51.jpg)
@@ -366,7 +366,7 @@ It can be observed that net 1 doesn’t go above 0.2V and Vref remains at a lowe
 
 
 
-## Part 10: Layout of components
+### Part 10: Layout of components
 
 Now after getting our final netlist, we have to design the layout for our BGR. Layout is drawing the masks used in fabrication. We are going to use the Magic VLSI tool for our layout design.
 
@@ -418,7 +418,7 @@ To obtain the top level design, we have placed all the blocks together, routed i
 
 
 
-## Part 11: Top level extraction and LVS
+### Part 11: Top level extraction and LVS
 In order to do the parasitic extraction follow the steps given below:
 + Open the Layout top.mag file >Options>Cell manger> select individual block and click open
 + In the magic command window type extract, all. This extracts the layout connectivity information into a ".ext." file.
@@ -456,12 +456,12 @@ In the top-level file include all the individually extracted spice file of all t
 
 
 
-## Conclusion and Opinion
+### Conclusion and Opinion
 The workshop is well paced program with good details on how to approach and start analog design. The hands-on experience is valuable in order to understand and retain the knowledge shared over two days. Step by step approach with connectivity between each module helps in learning concept from every angle. I would have preferred to have spent more time in understanding the calculation and analysis to determine the value of all the components such as resistors, BJT and FET’s. Over all good experience and insight into availability of open source tools to further learn more concepts 
 
 
 
-## References
+### References
 
 + https://github.com/ VrushabhDamle/sky130PLLdesignWorkshop
 + https://github.com/google/skywater-pdk-libs-sky130_fd_pr.git
